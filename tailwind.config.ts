@@ -1,3 +1,4 @@
+import { text } from "stream/consumers";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -17,8 +18,13 @@ export default {
         xxl: "1265px",
       },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        textGray: "#71767b",
+        textGrayLight: "#71767b",
+        borderGray: "#2f3336",
+        inputGray: "#202327",
+        iconBlue: "#0096ff",
+        iconGreen: "#00ba7c",
+        iconPink: "f91880",
       },
     },
   },
