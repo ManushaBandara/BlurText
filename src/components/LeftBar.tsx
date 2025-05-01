@@ -49,7 +49,7 @@ const menulist = [
 
 const LeftBar = () => {
   return (
-    <div className="h-screen  sticky top-0  flex flex-col justify-between pt-2 pb-8">
+    <div className="h-screen  sticky top-0   bg-[#262335] flex flex-col justify-between pt-2 pb-8">
       {/* Logo menu button */}
       <div className="">
         {/* Logo */}
@@ -57,7 +57,7 @@ const LeftBar = () => {
           <img src="icons/blur.png" alt="logo" width={150} height={150} />
         </Link>
         {/* Menu list */}
-        <div className="flex flex-col mt-10 gap-5">
+        <div className="flex flex-col mt-10 gap-5 ">
           {menulist.map((item) => (
             <Link href={item.link} key={item.id}>
               <div className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md cursor-pointer font-bold transition-all duration-200 ease-in-out">

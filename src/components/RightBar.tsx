@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 const RightBar = () => {
+  // Fetch news articles from the API
   const [news, setNews] = useState<{ title: string; url: string }[]>([]);
   useEffect(() => {
     const fetchNews = async () => {
@@ -46,6 +47,7 @@ const RightBar = () => {
     fetchNews();
   }, []);
 
+  // Function to handle search box click
   return (
     <div>
       <div className="relative">
@@ -81,8 +83,8 @@ const RightBar = () => {
           className="absolute top-9  right-3 transform -translate-y-1/2 w-5 h-5"
         />
       </div>
-
-      <div className="mt-4 border border-zinc-600 rounded-3xl p-4 bg-[#262335]">
+      {/* Search box*/}
+      <div className="mt-4 border border-zinc-600 rounded-3xl p-4 bg-[#262335] mb-4">
         <div className="mt-2 mb-2 ml-3">
           <div className="font-bold text-[19px] mb-1">Subscribe to Premium</div>
           <span className="text-white text-[14px] font-extralight">
@@ -99,8 +101,10 @@ const RightBar = () => {
         </div>
       </div>
 
-      <div className="mt-20 border border-zinc-600 rounded-lg p-4 bg-[#262335]">
-        <div className="flex justify-center items-center mb-4 ">
+      {/* News section */}
+
+      <div className="mt-17 border border-zinc-600 rounded-3xl p-4 bg-[#262335] ">
+        <div className="flex justify-center items-center mb-4 font-bold ">
           <span>Related NEWS</span>
         </div>
         {loading ? (
@@ -123,6 +127,66 @@ const RightBar = () => {
         ) : (
           <div>No news available</div>
         )}
+        <div style={{ color: "#1d9bf0" }}>
+          <a
+            href="https://news.google.com/home?hl=en-US&gl=US&ceid=US:en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            see more
+          </a>
+        </div>
+      </div>
+
+      <div className="mt-4 border border-zinc-600 rounded-3xl p-4 bg-[#262335] ">
+        <div className="flex  mb-4 font-bold ">
+          <span>Who to follow</span>
+        </div>
+
+        <div className="flex  items-center mb-4">
+          <div className="w-10 h-10 rounded-full bg-[#1d9bf0] flex justify-center items-center">
+            <img src="https://avatar.iran.liara.run/public/27" alt="" />
+          </div>
+          <div className="ml-3  flex flex-col">
+            <span>uki</span>
+            <span className="text-stone-400"> @hunter</span>
+          </div>
+          <div className="ml-auto flex items-center">
+            <button className="ml-20 bg-white text-black font-bold rounded-full px-4 py-1">
+              Follow
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer section */}
+      <div>
+        <div className="text-neutral-400 text-sm mt-4 flex flex-wrap justify-center gap-2">
+          <a href="/terms" className="hover:underline">
+            Terms and Conditions
+          </a>
+          |
+          <a href="/privacy" className="hover:underline">
+            Privacy Policy
+          </a>
+          |
+          <a href="/cookies" className="hover:underline">
+            Cookie Policy
+          </a>
+          |
+          <a href="/accessibility" className="hover:underline">
+            Accessibility
+          </a>
+          |
+          <a href="/ads-info" className="hover:underline">
+            Ads Info
+          </a>
+          |
+          <a href="/more" className="hover:underline">
+            More
+          </a>
+          © 2025 UKI.
+        </div>
       </div>
     </div>
   );
