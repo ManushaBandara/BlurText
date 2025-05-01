@@ -1,7 +1,11 @@
+import Welcom from "./welcom";
+
 const Homepage = () => {
   return (
-    <div className=''>Homepage</div>
-  )
-}
+    <div className="">
+      <Welcom />
+    </div>
+  );
+};
 
-export default Homepage
+export default Homepage;

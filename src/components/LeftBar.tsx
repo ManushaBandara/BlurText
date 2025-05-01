@@ -89,7 +89,20 @@ const LeftBar = () => {
         </Link>
       </div>
       {/* user */}
-      <div className="">user</div>
+      <div className="flex items-center justify-between mt-6 hover:bg-gray-700 rounded-full cursor-pointer transition-all duration-200 ease-in-out">
+        <div className="flex items-center gap-4 px-2 py-1">
+          <div className="w-8 h-8 relative rounded-full overflow-hidden ">
+            <img src="https://avatar.iran.liara.run/public/40" alt="" />
+          </div>
+          <div className=" hidden xxl:flex flex-col  font-bold">
+            <span>UKI</span>
+            <span className="text-zinc-600 font-thin">@uki Hunter</span>
+          </div>
+        </div>
+        <div className="hidden xxl:block cursor-pointer font-bold px-2">
+          ...
+        </div>
+      </div>
     </div>
   );
 };
