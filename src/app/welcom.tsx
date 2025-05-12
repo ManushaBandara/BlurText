@@ -3,7 +3,7 @@ import React from "react";
 const Welcom = () => {
   return (
     <div>
-      <div className="bg-[#262335] py-4">
+      <div className="bg-[#37334d] py-4">
         <div className="flex flex-col items-center">
           <img src="icons/blur.png" alt="logo" width={150} height={150} />
 
