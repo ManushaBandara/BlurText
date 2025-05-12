@@ -1,75 +1,78 @@
 import React from "react";
 import Link from "next/link";
-import { link } from "fs";
+import More from "@/options/More";
 
 const menulist = [
   {
     id: 1,
     name: "Home",
-    link: "/",
+    content: <div>Home Content</div>,
     icon: "home.svg",
   },
   {
     id: 2,
     name: "Explore",
-    link: "/",
+    content: <div>Explore Content</div>,
     icon: "explore.svg",
   },
   {
     id: 3,
     name: "Notification",
-    link: "/",
+    content: <div>Notification Content</div>,
     icon: "notification.svg",
   },
   {
     id: 4,
     name: "Messages",
-    link: "/",
+    content: <div>Messages Content</div>,
     icon: "message.svg",
   },
   {
     id: 5,
     name: "Bookmarks",
-    link: "/",
+    content: <div>Bookmarks Content</div>,
     icon: "bookmark.svg",
   },
   {
     id: 9,
     name: "Profile",
-    link: "/",
+    content: <div>Profile Content</div>,
     icon: "profile.svg",
   },
   {
     id: 10,
     name: "More",
-    link: "/",
+    content: <More />,
     icon: "more.svg",
   },
 ];
 
-const LeftBar = () => {
+const LeftBar = ({
+  onMenuClick,
+}: {
+  onMenuClick: (content: React.ReactNode) => void;
+}) => {
   return (
-    <div className="h-screen  sticky top-0   bg-[#262335] flex flex-col justify-between pt-2 pb-8">
-      {/* Logo menu button */}
-      <div className="">
-        {/* Logo */}
+    <div className="h-screen sticky top-0 bg-[#262335] flex flex-col justify-between pt-2 pb-8">
+      <div>
         <Link href="/">
           <img src="icons/blur.png" alt="logo" width={150} height={150} />
         </Link>
-        {/* Menu list */}
-        <div className="flex flex-col mt-10 gap-5 ">
+        <div className="flex flex-col mt-10 gap-5">
           {menulist.map((item) => (
-            <Link href={item.link} key={item.id}>
-              <div className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md cursor-pointer font-bold transition-all duration-200 ease-in-out">
-                <img
-                  src={`icons/${item.icon}`}
-                  alt={item.name}
-                  width={24}
-                  height={24}
-                />
-                <span className=" hidden xxl:inline text-sm">{item.name}</span>
-              </div>
-            </Link>
+            <div
+              key={item.id}
+              onClick={() => onMenuClick(item.content)}
+              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-md cursor-pointer font-bold transition-all duration-200 ease-in-out"
+            >
+              <img
+                src={`icons/${item.icon}`}
+                alt={item.name}
+                width={24}
+                height={24}
+              />
+              <span className="hidden xxl:inline text-sm">{item.name}</span>
+            </div>
           ))}
         </div>
         <Link
@@ -78,23 +81,21 @@ const LeftBar = () => {
         >
           <img src="icons/post.svg" alt="" width={24} height={24} />
         </Link>
-
         <Link href="/">
           <button
             type="button"
-            className="  hidden xxl:block bg-slate-100 text-black rounded-full px-20 py-2 mt-10  font-bold text-sm hover:bg-[#1ca1f1] hover:text-white transition-all duration-200 ease-in-out"
+            className="hidden xxl:block bg-slate-100 text-black rounded-full px-20 py-2 mt-10 font-bold text-sm hover:bg-[#1ca1f1] hover:text-white transition-all duration-200 ease-in-out"
           >
             Post
           </button>
         </Link>
       </div>
-      {/* user */}
       <div className="flex items-center justify-between mt-6 hover:bg-gray-700 rounded-full cursor-pointer transition-all duration-200 ease-in-out">
         <div className="flex items-center gap-4 px-2 py-1">
-          <div className="w-8 h-8 relative rounded-full overflow-hidden ">
+          <div className="w-8 h-8 relative rounded-full overflow-hidden">
             <img src="https://avatar.iran.liara.run/public/40" alt="" />
           </div>
-          <div className=" hidden xxl:flex flex-col  font-bold">
+          <div className="hidden xxl:flex flex-col font-bold">
             <span>UKI</span>
             <span className="text-zinc-600 font-thin">@uki Hunter</span>
           </div>
