@@ -3,6 +3,13 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "./Icon";
 
+interface CryptoData {
+  id: string;
+  name: string;
+  current_price: number;
+  price_change_percentage_24h: number;
+}
+
 const RightBar = () => {
   // Fetch news articles from the API
   const [news, setNews] = useState<{ title: string; url: string }[]>([]);
@@ -46,6 +53,32 @@ const RightBar = () => {
     };
 
     fetchNews();
+  }, []);
+
+  const [crypto, setCrypto] = useState<CryptoData[]>([]);
+  const [cryptoLoading, setCryptoLoading] = useState(true);
+
+  // Fetch cryptocurrency data
+  useEffect(() => {
+    const fetchCrypto = async () => {
+      try {
+        const response = await fetch(
+          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1&sparkline=false"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setCrypto(data);
+      } catch (error) {
+        console.error("Error fetching crypto data:", error);
+        setCrypto([]);
+      } finally {
+        setCryptoLoading(false);
+      }
+    };
+
+    fetchCrypto();
   }, []);
 
   // Function to handle search box click
@@ -98,6 +131,41 @@ const RightBar = () => {
             Subscribe
           </Link>
         </div>
+      </div>
+
+      {/* Cryptocurrency section */}
+      <div className="mt-3 mb-2 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
+        <div className="flex justify-center items-center mb-4 font-bold">
+          <span>Trending Crypto</span>
+        </div>
+        {cryptoLoading ? (
+          <div>Loading crypto data...</div>
+        ) : Array.isArray(crypto) && crypto.length > 0 ? (
+          <ul className="space-y-2">
+            {crypto.slice(0, 3).map((coin) => (
+              <li key={coin.id} className="flex justify-between items-center">
+                <div>
+                  <span className="font-medium text-sm">{coin.name}</span>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    ${coin.current_price.toFixed(2)}
+                  </div>
+                </div>
+                <div
+                  className={`text-sm font-medium ${
+                    coin.price_change_percentage_24h >= 0
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {coin.price_change_percentage_24h >= 0 ? "+" : ""}
+                  {coin.price_change_percentage_24h.toFixed(2)}%
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>No crypto data available</div>
+        )}
       </div>
 
       {/* News section */}
