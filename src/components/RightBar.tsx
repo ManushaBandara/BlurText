@@ -49,12 +49,12 @@ const RightBar = () => {
 
   // Function to handle search box click
   return (
-    <div>
+    <div className="bg-white dark:bg-[#262335] text-black dark:text-white transition-colors duration-300">
       <div className="relative">
         <input
           type="text"
           placeholder="search"
-          className="bg-[#262335] border border-[#3b3b3b] rounded-full py-2 px-10 w-full mt-4 pl-3 focus:border-blue-500 focus:outline-none"
+          className="bg-gray-100 dark:bg-[#262335] border border-gray-300 dark:border-[#3b3b3b] text-black dark:text-white rounded-full py-2 px-10 w-full mt-4 pl-3 focus:border-blue-500 focus:outline-none transition-colors duration-300"
           onClick={() => {
             const searchBox = document.createElement("div");
             searchBox.textContent = "Search using keyword";
@@ -84,10 +84,10 @@ const RightBar = () => {
         />
       </div>
       {/* Search box*/}
-      <div className="mt-4 border border-zinc-600 rounded-3xl p-4 bg-[#262335] mb-4">
+      <div className="mt-4 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] mb-4 transition-colors duration-300">
         <div className="mt-2 mb-2 ml-3">
           <div className="font-bold text-[19px] mb-1">Subscribe to Premium</div>
-          <span className="text-white text-[14px] font-extralight">
+          <span className="text-gray-700 dark:text-white text-[14px] font-extralight">
             Subscribe to unlock new features and if eligible, receive a share of
             revenue.
           </span>
@@ -103,7 +103,7 @@ const RightBar = () => {
 
       {/* News section */}
 
-      <div className="mt-17 border border-zinc-600 rounded-3xl p-4 bg-[#262335] ">
+      <div className="mt-17 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
         <div className="flex justify-center items-center mb-4 font-bold ">
           <span>Related NEWS</span>
         </div>
@@ -117,7 +117,7 @@ const RightBar = () => {
                   href={article.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-400 hover:underline font-extralight text-[14px] justify-center flex"
+                  className="text-gray-600 dark:text-neutral-400 hover:underline font-extralight text-[14px] justify-center flex"
                 >
                   {article.title}
                 </a>
@@ -138,7 +138,7 @@ const RightBar = () => {
         </div>
       </div>
 
-      <div className="mt-4 border border-zinc-600 rounded-3xl p-4 bg-[#262335] ">
+      <div className="mt-4 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
         <div className="flex  mb-4 font-bold ">
           <span>Who to follow</span>
         </div>
@@ -149,10 +149,10 @@ const RightBar = () => {
           </div>
           <div className="ml-3  flex flex-col">
             <span>uki</span>
-            <span className="text-stone-400"> @hunter</span>
+            <span className="text-gray-500 dark:text-stone-400"> @hunter</span>
           </div>
           <div className="ml-auto flex items-center">
-            <button className="ml-20 bg-white text-black font-bold rounded-full px-4 py-1">
+            <button className="ml-20 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full px-4 py-1 transition-colors duration-200">
               Follow
             </button>
           </div>
@@ -161,7 +161,7 @@ const RightBar = () => {
 
       {/* Footer section */}
       <div>
-        <div className="text-neutral-400 text-sm mt-4 flex flex-wrap justify-center gap-2">
+        <div className="text-gray-500 dark:text-neutral-400 text-sm mt-4 flex flex-wrap justify-center gap-2">
           <a href="/terms" className="hover:underline">
             Terms and Conditions
           </a>

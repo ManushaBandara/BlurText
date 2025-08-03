@@ -1,4 +1,3 @@
-import { text } from "stream/consumers";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -8,6 +7,7 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx}", // Ensure this covers your file
   ],
+  darkMode: "class",
   theme: {
     extend: {
       screens: {
@@ -26,6 +26,19 @@ export default {
         iconBlue: "#0096ff",
         iconGreen: "#00ba7c",
         iconPink: "f91880",
+        // Theme-aware colors
+        background: {
+          light: "#ffffff",
+          dark: "#262335",
+        },
+        text: {
+          light: "#000000",
+          dark: "#ededed",
+        },
+        border: {
+          light: "#e1e8ed",
+          dark: "#2f3336",
+        },
       },
     },
   },
