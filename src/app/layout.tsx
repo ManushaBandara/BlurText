@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import LeftBar from "@/components/LeftBar";
 import "./globals.css";
 import RightBar from "@/components/RightBar";
-import More from "@/options/More";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 //export const metadata = {
@@ -26,9 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <title>BlurText - Anonymous Social Platform</title>
+        <meta
+          name="description"
+          content="Anonymous social interaction through unique credentials. Share thoughts freely without revealing your identity."
+        />
         <link rel="icon" href="icons/icone.png" />
-        {/* <title>{metadata.title}</title>*
-        <meta name="description" content={metadata.description} />*/}
       </head>
       <body>
         <ThemeProvider>
