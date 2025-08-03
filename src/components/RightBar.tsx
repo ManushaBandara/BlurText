@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "./Icon";
 import Privacy from "@/options/Privacy";
+import { TranslatedText } from "@/hooks/useTranslation";
+import { useTranslation } from "@/contexts/TranslationContext";
 
 interface CryptoData {
   id: string;
@@ -16,6 +18,9 @@ const RightBar = ({
 }: {
   onMenuClick?: (content: React.ReactNode) => void;
 }) => {
+  const { translate } = useTranslation();
+  const [searchPlaceholder, setSearchPlaceholder] = useState("search");
+
   // State for Privacy component navigation - REMOVED (no longer needed)
   // const [showPrivacy, setShowPrivacy] = useState(false);
 
@@ -26,6 +31,15 @@ const RightBar = ({
   // Cryptocurrency state
   const [crypto, setCrypto] = useState<CryptoData[]>([]);
   const [cryptoLoading, setCryptoLoading] = useState(true);
+
+  // Translate search placeholder
+  useEffect(() => {
+    const translatePlaceholder = async () => {
+      const translated = await translate("search");
+      setSearchPlaceholder(translated);
+    };
+    translatePlaceholder();
+  }, [translate]);
 
   // Handle Privacy Policy click
   const handlePrivacyClick = (e: React.MouseEvent) => {
@@ -87,11 +101,12 @@ const RightBar = ({
       <div className="relative">
         <input
           type="text"
-          placeholder="search"
+          placeholder={searchPlaceholder}
           className="bg-gray-100 dark:bg-[#262335] border border-gray-300 dark:border-[#3b3b3b] text-black dark:text-white rounded-full py-2 px-10 w-full mt-4 pl-3 focus:border-blue-500 focus:outline-none transition-colors duration-300"
-          onClick={() => {
+          onClick={async () => {
+            const searchMessage = await translate("Search using keyword");
             const searchBox = document.createElement("div");
-            searchBox.textContent = "Search using keyword";
+            searchBox.textContent = searchMessage;
             searchBox.style.textAlign = "center";
             searchBox.style.width = "250px";
             searchBox.style.fontSize = "15px";
@@ -118,17 +133,18 @@ const RightBar = ({
       {/* Search box*/}
       <div className="mt-4 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] mb-4 transition-colors duration-300">
         <div className="mt-2 mb-1 ml-3">
-          <div className="font-bold text-[19px] mb-1">Subscribe to Premium</div>
+          <div className="font-bold text-[19px] mb-1">
+            <TranslatedText>Subscribe to Premium</TranslatedText>
+          </div>
           <span className="text-gray-700 dark:text-white text-[14px] font-extralight">
-            Subscribe to unlock new features and if eligible, receive a share of
-            revenue.
+            <TranslatedText>Subscribe to unlock new features and if eligible, receive a share of revenue.</TranslatedText>
           </span>
 
           <Link
             href="/subscribe"
             className="mt-3  flex justify-center flex-direction-row bg-[#1a8cd8] w-40 rounded-full py-2 text-center text-white font-bold "
           >
-            Subscribe
+            <TranslatedText>Subscribe</TranslatedText>
           </Link>
         </div>
       </div>
@@ -136,10 +152,10 @@ const RightBar = ({
       {/* Cryptocurrency section */}
       <div className="mt-1 mb-2 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
         <div className="flex justify-center items-center mb-4 font-bold">
-          <span>Trending Crypto</span>
+          <span><TranslatedText>Trending Crypto</TranslatedText></span>
         </div>
         {cryptoLoading ? (
-          <div>Loading crypto data...</div>
+          <div><TranslatedText>Loading crypto data...</TranslatedText></div>
         ) : Array.isArray(crypto) && crypto.length > 0 ? (
           <ul className="space-y-2">
             {crypto.slice(0, 3).map((coin) => (
@@ -164,7 +180,7 @@ const RightBar = ({
             ))}
           </ul>
         ) : (
-          <div>No crypto data available</div>
+          <div><TranslatedText>No crypto data available</TranslatedText></div>
         )}
       </div>
 
@@ -172,10 +188,10 @@ const RightBar = ({
 
       <div className="mt-17 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
         <div className="flex justify-center items-center mb-4 font-bold ">
-          <span>Related NEWS</span>
+          <span><TranslatedText>Related NEWS</TranslatedText></span>
         </div>
         {loading ? (
-          <div>Loading...</div>
+          <div><TranslatedText>Loading...</TranslatedText></div>
         ) : Array.isArray(news) && news.length > 0 ? (
           <ul className="list-disc gap-2 pl-4">
             {news.slice(0, 3).map((article, index) => (
@@ -192,7 +208,7 @@ const RightBar = ({
             ))}
           </ul>
         ) : (
-          <div>No news available</div>
+          <div><TranslatedText>No news available</TranslatedText></div>
         )}
         <div style={{ color: "#1d9bf0" }}>
           <a
@@ -200,14 +216,14 @@ const RightBar = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            see more
+            <TranslatedText>see more</TranslatedText>
           </a>
         </div>
       </div>
 
       <div className="mt-4 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
         <div className="flex  mb-4 font-bold ">
-          <span>Who to follow</span>
+          <span><TranslatedText>Who to follow</TranslatedText></span>
         </div>
 
         <div className="flex  items-center mb-4">
@@ -220,7 +236,7 @@ const RightBar = ({
           </div>
           <div className="ml-auto flex items-center">
             <button className="ml-20 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full px-4 py-1 transition-colors duration-200">
-              Follow
+              <TranslatedText>Follow</TranslatedText>
             </button>
           </div>
         </div>
@@ -235,13 +251,13 @@ const RightBar = ({
             className="hover:underline"
             onClick={handlePrivacyClick}
           >
-            Privacy Policy
+            <TranslatedText>Privacy Policy</TranslatedText>
           </a>
           |
           <a href="/more" className="hover:underline">
-            More
+            <TranslatedText>More</TranslatedText>
           </a>
-          © 2025 UKI.
+          <TranslatedText>© 2025 UKI.</TranslatedText>
         </div>
       </div>
     </div>

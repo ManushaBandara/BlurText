@@ -1,5 +1,6 @@
 import React from "react";
 import Welcom from "@/app/welcom";
+import { TranslatedText } from "@/hooks/useTranslation";
 
 interface PrivacyProps {
   onBack?: () => void;
@@ -32,21 +33,19 @@ const Privacy = ({ onBack }: PrivacyProps) => {
               </svg>
             </button>
           )}
-          <h1 className="font-bold">Privacy Policy</h1>
+          <h1 className="font-bold">
+            <TranslatedText>Privacy Policy</TranslatedText>
+          </h1>
         </div>
         <hr className="opacity-50 border-gray-200 dark:border-gray-700" />
         <div className="px-6 mt-6 text-gray-700 dark:text-gray-300 max-w-4xl mx-auto">
           {/* Introduction */}
           <div className="text-center mb-8">
             <h2 className="font-bold text-xl mb-4 text-black dark:text-white">
-              Privacy & Safety
+              <TranslatedText>Privacy & Safety</TranslatedText>
             </h2>
             <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed max-w-3xl mx-auto">
-              BlurText provides anonymous social interaction through persistent,
-              unique credentials. We give you a unique username and password for
-              your first visit without requiring any personal information. Your
-              posts and interactions are saved in encrypted form, but never
-              linked to your real identity.
+              <TranslatedText>BlurText provides anonymous social interaction through persistent, unique credentials. We give you a unique username and password for your first visit without requiring any personal information. Your posts and interactions are saved in encrypted form, but never linked to your real identity.</TranslatedText>
             </p>
           </div>
 
