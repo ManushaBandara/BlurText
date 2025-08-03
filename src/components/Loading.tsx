@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { TranslatedText } from "@/hooks/useTranslation";
 
 const Loading = () => {
   return (
@@ -19,7 +20,7 @@ const Loading = () => {
 
         {/* Loading Text */}
         <p className="mt-2 text-gray-500 dark:text-gray-400 animate-pulse">
-          Loading your anonymous experience...
+          <TranslatedText>Loading your anonymous experience...</TranslatedText>
         </p>
 
         {/* Dots Animation */}

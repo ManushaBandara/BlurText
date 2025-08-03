@@ -5,6 +5,7 @@ import Link from "next/link";
 import More from "@/options/More";
 import Icon from "./Icon";
 import { useTheme } from "@/contexts/ThemeContext";
+import { TranslatedText } from "@/hooks/useTranslation";
 
 const menulist = [
   {
@@ -77,7 +78,9 @@ const LeftBar = ({
               className="flex items-center gap-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md cursor-pointer font-bold transition-all duration-200 ease-in-out"
             >
               <Icon name={item.icon} width={24} height={24} />
-              <span className="hidden xxl:inline text-sm">{item.name}</span>
+              <span className="hidden xxl:inline text-sm">
+                <TranslatedText>{item.name}</TranslatedText>
+              </span>
             </div>
           ))}
         </div>
@@ -92,7 +95,7 @@ const LeftBar = ({
             type="button"
             className="hidden xxl:block bg-blue-500 text-white rounded-full px-20 py-2 mt-10 font-bold text-sm hover:bg-blue-600 transition-all duration-200 ease-in-out"
           >
-            Post
+            <TranslatedText>Post</TranslatedText>
           </button>
         </Link>
       </div>

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { TranslatedText } from "@/hooks/useTranslation";
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
@@ -11,10 +12,12 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       className="flex items-center justify-between w-full px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 rounded-lg"
     >
-      <span className="text-sm font-medium">Theme</span>
+      <span className="text-sm font-medium">
+        <TranslatedText>Theme</TranslatedText>
+      </span>
       <div className="flex items-center space-x-2">
         <span className="text-xs text-gray-500 dark:text-gray-400">
-          {theme === "dark" ? "Dark" : "Light"}
+          <TranslatedText>{theme === "dark" ? "Dark" : "Light"}</TranslatedText>
         </span>
         <div className="relative">
           <div

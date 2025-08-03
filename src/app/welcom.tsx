@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { TranslatedText } from "@/hooks/useTranslation";
 
 const Welcom = () => {
   const { theme } = useTheme();
@@ -18,7 +19,7 @@ const Welcom = () => {
           />
 
           <h6 className="text-gray-600 dark:text-textGrayLight mt-1 text-sm text-center font-thin">
-            Your anonymous messaging app.
+            <TranslatedText>Your anonymous messaging app.</TranslatedText>
           </h6>
         </div>
       </div>
