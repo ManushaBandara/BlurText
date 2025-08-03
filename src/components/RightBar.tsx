@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Icon from "./Icon";
 
 const RightBar = () => {
   // Fetch news articles from the API
@@ -77,11 +78,9 @@ const RightBar = () => {
             }, 1800);
           }}
         />
-        <img
-          src="icons/explore.svg"
-          alt=""
-          className="absolute top-9  right-3 transform -translate-y-1/2 w-5 h-5"
-        />
+        <div className="absolute top-9 right-3 transform -translate-y-1/2 w-5 h-5">
+          <Icon name="search.svg" width={20} height={20} />
+        </div>
       </div>
       {/* Search box*/}
       <div className="mt-4 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] mb-4 transition-colors duration-300">

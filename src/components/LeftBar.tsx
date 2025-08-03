@@ -1,6 +1,10 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import More from "@/options/More";
+import Icon from "./Icon";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const menulist = [
   {
@@ -52,11 +56,18 @@ const LeftBar = ({
 }: {
   onMenuClick: (content: React.ReactNode) => void;
 }) => {
+  const { theme } = useTheme();
+
   return (
     <div className="h-screen sticky top-0 bg-white dark:bg-[#262335] text-black dark:text-white flex flex-col justify-between pt-2 pb-8 transition-colors duration-300">
       <div>
         <Link href="/">
-          <img src="icons/blur.png" alt="logo" width={150} height={150} />
+          <img
+            src={theme === "light" ? "icons/blur-dark.png" : "icons/blur.png"}
+            alt="logo"
+            width={150}
+            height={150}
+          />
         </Link>
         <div className="flex flex-col mt-10 gap-5">
           {menulist.map((item) => (
@@ -65,12 +76,7 @@ const LeftBar = ({
               onClick={() => onMenuClick(item.content)}
               className="flex items-center gap-2 p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md cursor-pointer font-bold transition-all duration-200 ease-in-out"
             >
-              <img
-                src={`icons/${item.icon}`}
-                alt={item.name}
-                width={24}
-                height={24}
-              />
+              <Icon name={item.icon} width={24} height={24} />
               <span className="hidden xxl:inline text-sm">{item.name}</span>
             </div>
           ))}
@@ -79,7 +85,7 @@ const LeftBar = ({
           href="/"
           className="bg-blue-500 text-white rounded-full font-bold w-12 h-12 flex items-center justify-center xxl:hidden mt-10 hover:bg-blue-600 transition-all duration-200 ease-in-out"
         >
-          <img src="icons/post.svg" alt="" width={24} height={24} />
+          <Icon name="post.svg" width={24} height={24} className="text-white" />
         </Link>
         <Link href="/">
           <button
