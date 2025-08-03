@@ -16,12 +16,7 @@ const More = () => {
       <div className="mt-4 px-4">
         <div className="space-y-2">
           <ThemeToggle />
-          <div className="flex items-center justify-between w-full px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 rounded-lg">
-            <span className="text-sm font-medium">Language</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400">
-              English
-            </span>
-          </div>
+
           <div className="flex items-center justify-between w-full px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 rounded-lg">
             <span className="text-sm font-medium">Accessibility</span>
           </div>
