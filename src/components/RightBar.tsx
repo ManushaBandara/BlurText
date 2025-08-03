@@ -117,7 +117,7 @@ const RightBar = () => {
       </div>
       {/* Search box*/}
       <div className="mt-4 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] mb-4 transition-colors duration-300">
-        <div className="mt-2 mb-2 ml-3">
+        <div className="mt-2 mb-1 ml-3">
           <div className="font-bold text-[19px] mb-1">Subscribe to Premium</div>
           <span className="text-gray-700 dark:text-white text-[14px] font-extralight">
             Subscribe to unlock new features and if eligible, receive a share of
@@ -134,7 +134,7 @@ const RightBar = () => {
       </div>
 
       {/* Cryptocurrency section */}
-      <div className="mt-3 mb-2 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
+      <div className="mt-1 mb-2 border border-gray-300 dark:border-zinc-600 rounded-3xl p-4 bg-gray-50 dark:bg-[#262335] transition-colors duration-300">
         <div className="flex justify-center items-center mb-4 font-bold">
           <span>Trending Crypto</span>
         </div>
