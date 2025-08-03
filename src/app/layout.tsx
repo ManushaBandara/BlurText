@@ -42,7 +42,7 @@ export default function RootLayout({
               {activeContent}
             </div>
             <div className="hidden ml-4 md:ml-8 h-screen lg:flex flex-1">
-              <RightBar />
+              <RightBar onMenuClick={handleMenuClick} />
             </div>
           </div>
         </ThemeProvider>

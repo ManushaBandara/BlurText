@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Icon from "./Icon";
+import Privacy from "@/options/Privacy";
 
 interface CryptoData {
   id: string;
@@ -10,9 +11,29 @@ interface CryptoData {
   price_change_percentage_24h: number;
 }
 
-const RightBar = () => {
+const RightBar = ({
+  onMenuClick,
+}: {
+  onMenuClick?: (content: React.ReactNode) => void;
+}) => {
+  // State for Privacy component navigation - REMOVED (no longer needed)
+  // const [showPrivacy, setShowPrivacy] = useState(false);
+
   // Fetch news articles from the API
   const [news, setNews] = useState<{ title: string; url: string }[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Cryptocurrency state
+  const [crypto, setCrypto] = useState<CryptoData[]>([]);
+  const [cryptoLoading, setCryptoLoading] = useState(true);
+
+  // Handle Privacy Policy click
+  const handlePrivacyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onMenuClick) {
+      onMenuClick(<Privacy />);
+    }
+  };
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -35,28 +56,6 @@ const RightBar = () => {
 
     fetchNews();
   }, []);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await fetch(
-          "https://newsapi.org/v2/top-headlines?country=us&apiKey=YOUR_API_KEY"
-        );
-        const data = await response.json();
-        setNews(data.articles);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching news:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchNews();
-  }, []);
-
-  const [crypto, setCrypto] = useState<CryptoData[]>([]);
-  const [cryptoLoading, setCryptoLoading] = useState(true);
 
   // Fetch cryptocurrency data
   useEffect(() => {
@@ -82,6 +81,7 @@ const RightBar = () => {
   }, []);
 
   // Function to handle search box click
+
   return (
     <div className="bg-white dark:bg-[#262335] text-black dark:text-white transition-colors duration-300">
       <div className="relative">
@@ -229,24 +229,13 @@ const RightBar = () => {
       {/* Footer section */}
       <div>
         <div className="text-gray-500 dark:text-neutral-400 text-sm mt-4 flex flex-wrap justify-center gap-2">
-          <a href="/terms" className="hover:underline">
-            Terms and Conditions
-          </a>
           |
-          <a href="/privacy" className="hover:underline">
+          <a
+            href="/privacy"
+            className="hover:underline"
+            onClick={handlePrivacyClick}
+          >
             Privacy Policy
-          </a>
-          |
-          <a href="/cookies" className="hover:underline">
-            Cookie Policy
-          </a>
-          |
-          <a href="/accessibility" className="hover:underline">
-            Accessibility
-          </a>
-          |
-          <a href="/ads-info" className="hover:underline">
-            Ads Info
           </a>
           |
           <a href="/more" className="hover:underline">
