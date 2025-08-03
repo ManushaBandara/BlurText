@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LeftBar from "@/components/LeftBar";
 import "./globals.css";
 import RightBar from "@/components/RightBar";
+import Loading from "@/components/Loading";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 //export const metadata = {
@@ -17,11 +18,60 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [activeContent, setActiveContent] = useState<React.ReactNode>(children);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Loading effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        setIsLoading(true);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1500);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   const handleMenuClick = (content: React.ReactNode) => {
-    setActiveContent(content);
+    setIsLoading(true);
+    setTimeout(() => {
+      setActiveContent(content);
+      setIsLoading(false);
+    }, 300);
   };
 
+  if (isLoading) {
+    return (
+      <html lang="en">
+        <head>
+          <title>BlurText - Anonymous Social Platform</title>
+          <meta
+            name="description"
+            content="Anonymous social interaction through unique credentials. Share thoughts freely without revealing your identity."
+          />
+          <link rel="icon" href="icons/icone.png" />
+        </head>
+        <body>
+          <ThemeProvider>
+            <Loading />
+          </ThemeProvider>
+        </body>
+      </html>
+    );
+  }
+
+  // Show main app
   return (
     <html lang="en">
       <head>
