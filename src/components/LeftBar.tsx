@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import More from "@/options/More";
 import Icon from "./Icon";
@@ -54,10 +54,31 @@ const menulist = [
 
 const LeftBar = ({
   onMenuClick,
+  onLogout,
 }: {
   onMenuClick: (content: React.ReactNode) => void;
+  onLogout: () => void;
 }) => {
   const { theme } = useTheme();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="h-screen sticky top-0 bg-white dark:bg-[#262335] text-black dark:text-white flex flex-col justify-between pt-2 pb-8 transition-colors duration-300">
@@ -99,21 +120,60 @@ const LeftBar = ({
           </button>
         </Link>
       </div>
-      <div className="flex items-center justify-between mt-6 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full cursor-pointer transition-all duration-200 ease-in-out">
-        <div className="flex items-center gap-4 px-2 py-1">
-          <div className="w-8 h-8 relative rounded-full overflow-hidden">
-            <img src="https://avatar.iran.liara.run/public/40" alt="" />
+      <div className="relative" ref={dropdownRef}>
+        <div className="flex items-center justify-between mt-6 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full cursor-pointer transition-all duration-200 ease-in-out">
+          <div className="flex items-center gap-4 px-2 py-1">
+            <div className="w-8 h-8 relative rounded-full overflow-hidden">
+              <img src="https://avatar.iran.liara.run/public/40" alt="" />
+            </div>
+            <div className="hidden xxl:flex flex-col font-bold">
+              <span>UKI</span>
+              <span className="text-gray-500 dark:text-zinc-600 font-thin">
+                @uki Hunter
+              </span>
+            </div>
           </div>
-          <div className="hidden xxl:flex flex-col font-bold">
-            <span>UKI</span>
-            <span className="text-gray-500 dark:text-zinc-600 font-thin">
-              @uki Hunter
-            </span>
+          <div
+            className="hidden xxl:block cursor-pointer font-bold px-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full p-1 transition-all duration-200"
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            ...
           </div>
         </div>
-        <div className="hidden xxl:block cursor-pointer font-bold px-2">
-          ...
-        </div>
+
+        {/* Dropdown Menu */}
+        {showDropdown && (
+          <div className="absolute bottom-full left-0 right-0 mb-2 bg-white dark:bg-[#2b2941] border border-gray-200 border-none rounded-full shadow-lg overflow-hidden z-50">
+            <button
+              onClick={() => {
+                onLogout();
+                setShowDropdown(false);
+              }}
+              className="w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 flex items-center gap-3 text-red-600 dark:text-red-400 font-medium"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+              <span className="hidden xxl:inline">
+                <TranslatedText>Log out </TranslatedText>
+              </span>
+              <span className="xxl:hidden">
+                <TranslatedText>Logout</TranslatedText>
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ export default function RootLayout({
   // Loading effect - only run after login
   useEffect(() => {
     if (!isLoggedIn) return; // Don't run loading effect if not logged in
-    
+
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -71,6 +71,10 @@ export default function RootLayout({
   const handleLogin = () => {
     setIsLoggedIn(true);
     setIsLoading(true); // Reset loading state when logging in
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
   };
 
   // Show initial loading screen first
@@ -156,18 +160,11 @@ export default function RootLayout({
         <ThemeProvider>
           <TranslationProvider>
             <div className="max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl xxl:max-w-screen-xxl mx-auto flex justify-between bg-white dark:bg-[#262335] text-black dark:text-[#ededed] transition-colors duration-300">
-              {/* Logout Button */}
-              <div className="absolute top-4 right-4 z-10">
-                <button
-                  onClick={() => setIsLoggedIn(false)}
-                  className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm transition-colors duration-300"
-                >
-                  Logout
-                </button>
-              </div>
-              
               <div className="px-3 xsm:px-4 xxl:px-8">
-                <LeftBar onMenuClick={handleMenuClick} />
+                <LeftBar
+                  onMenuClick={handleMenuClick}
+                  onLogout={handleLogout}
+                />
               </div>
               <div className="flex-1 lg:min-w-[600px] border-x-[1px] border-gray-200 dark:border-borderGray">
                 {activeContent}
