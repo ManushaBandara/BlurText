@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { getFallbackTranslation } from "@/utils/fallbackTranslations";
 
-export type Language = "en" | "ru" | "es" | "fr" | "de" | "it" | "pt" | "ja" | "ko" | "zh";
+export type Language = "en" | "ru" | "it" | "fr" | "si" | "ja";
 
 interface TranslationContextType {
   currentLanguage: Language;
@@ -38,6 +38,12 @@ export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("selectedLanguage", language);
     // Clear translations cache when language changes
     setTranslations({});
+    
+    // Reload the page while staying on the same page/URL
+    if (typeof window !== 'undefined') {
+      // Force reload without changing the current URL
+      window.location.href = window.location.href;
+    }
   };
 
   const translate = async (text: string): Promise<string> => {
@@ -135,12 +141,8 @@ export const useTranslation = () => {
 export const languageNames: { [key in Language]: string } = {
   en: "English",
   ru: "Русский",
-  es: "Español",
-  fr: "Français",
-  de: "Deutsch",
   it: "Italiano",
-  pt: "Português",
+  fr: "Français",
+  si: "සිංහල",
   ja: "日本語",
-  ko: "한국어",
-  zh: "中文",
 };

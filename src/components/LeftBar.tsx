@@ -11,37 +11,37 @@ const menulist = [
   {
     id: 1,
     name: "Home",
-    content: <div>Home Content</div>,
+    content: <div><TranslatedText>Home Content</TranslatedText></div>,
     icon: "home.svg",
   },
   {
     id: 2,
     name: "Explore",
-    content: <div>Explore Content</div>,
+    content: <div><TranslatedText>Explore Content</TranslatedText></div>,
     icon: "explore.svg",
   },
   {
     id: 3,
     name: "Notification",
-    content: <div>Notification Content</div>,
+    content: <div><TranslatedText>Notification Content</TranslatedText></div>,
     icon: "notification.svg",
   },
   {
     id: 4,
     name: "Messages",
-    content: <div>Messages Content</div>,
+    content: <div><TranslatedText>Messages Content</TranslatedText></div>,
     icon: "message.svg",
   },
   {
     id: 5,
     name: "Bookmarks",
-    content: <div>Bookmarks Content</div>,
+    content: <div><TranslatedText>Bookmarks Content</TranslatedText></div>,
     icon: "bookmark.svg",
   },
   {
     id: 9,
     name: "Profile",
-    content: <div>Profile Content</div>,
+    content: <div><TranslatedText>Profile Content</TranslatedText></div>,
     icon: "profile.svg",
   },
   {
