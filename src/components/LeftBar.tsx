@@ -55,13 +55,22 @@ const menulist = [
 const LeftBar = ({
   onMenuClick,
   onLogout,
+  user,
 }: {
   onMenuClick: (content: React.ReactNode) => void;
   onLogout: () => void;
+  user?: {
+    username: string;
+    id: string;
+  } | null;
 }) => {
   const { theme } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Generate display name and username
+  const displayName = user?.username || "Anonymous";
+  const username = user?.username || "anonymous";
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -127,9 +136,11 @@ const LeftBar = ({
               <img src="https://avatar.iran.liara.run/public/40" alt="" />
             </div>
             <div className="hidden xxl:flex flex-col font-bold">
-              <span>UKI</span>
-              <span className="text-gray-500 dark:text-zinc-600 font-thin">
-                @uki Hunter
+              <span className="text-sm font-bold text-gray-900 dark:text-white capitalize">
+                {displayName}
+              </span>
+              <span className="text-xs text-gray-500 dark:text-zinc-600 font-normal">
+                @{username.toLowerCase()}
               </span>
             </div>
           </div>

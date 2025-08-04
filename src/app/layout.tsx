@@ -23,6 +23,40 @@ export default function RootLayout({
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showInitialLoading, setShowInitialLoading] = useState(true);
+  const [user, setUser] = useState<{
+    username: string;
+    id: string;
+  } | null>(null);
+
+  // Check if user is logged in when component mounts
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch("/api/auth/me", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        setIsLoggedIn(true);
+        setUser({
+          username: userData.user.username,
+          id: userData.user.id,
+        });
+      } else {
+        setIsLoggedIn(false);
+        setUser(null);
+      }
+    } catch (error) {
+      console.error("Auth check failed:", error);
+      setIsLoggedIn(false);
+      setUser(null);
+    }
+  };
 
   // Initial loading effect - shows before login
   useEffect(() => {
@@ -68,13 +102,43 @@ export default function RootLayout({
     }, 300);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (userData?: { username: string; id: string }) => {
     setIsLoggedIn(true);
+    if (userData) {
+      // Set user data directly from login response
+      setUser(userData);
+    } else {
+      // Fallback to checking auth status
+      setTimeout(() => {
+        checkAuthStatus();
+      }, 100);
+    }
     setIsLoading(true); // Reset loading state when logging in
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        console.log("Logout successful");
+        setIsLoggedIn(false);
+        setUser(null);
+      } else {
+        console.error("Logout failed");
+        setIsLoggedIn(false);
+        setUser(null);
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+      setIsLoggedIn(false);
+      setUser(null);
+    }
   };
 
   // Show initial loading screen first
@@ -164,6 +228,7 @@ export default function RootLayout({
                 <LeftBar
                   onMenuClick={handleMenuClick}
                   onLogout={handleLogout}
+                  user={user}
                 />
               </div>
               <div className="flex-1 lg:min-w-[600px] border-x-[1px] border-gray-200 dark:border-borderGray">

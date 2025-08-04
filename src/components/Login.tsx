@@ -5,14 +5,14 @@ import { useState, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface LoginProps {
-  onLogin: () => void;
+  onLogin: (userData?: { username: string; id: string }) => void;
 }
 
 const Login = ({ onLogin }: LoginProps) => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [generatedUsername, setGeneratedUsername] = useState("");
   const [generatedPassword, setGeneratedPassword] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
+  const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showGeneratedPassword, setShowGeneratedPassword] = useState(false);
@@ -119,6 +119,71 @@ const Login = ({ onLogin }: LoginProps) => {
     window.URL.revokeObjectURL(url);
   };
 
+  // Handle login API call
+  const handleLogin = async () => {
+    if (!loginUsername || !loginPassword) {
+      alert("Please enter both username and password");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: loginUsername,
+          password: loginPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        onLogin({
+          username: data.user.username,
+          id: data.user.id,
+        });
+      } else {
+        alert(data.error || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Login failed. Please try again.");
+    }
+  };
+
+  // Handle registration API call
+  const handleRegister = async () => {
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: generatedUsername,
+          password: generatedPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(
+          "Account created successfully! Please login with your credentials."
+        );
+        switchToLogin();
+      } else {
+        alert(data.error || "Registration failed");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Registration failed. Please try again.");
+    }
+  };
+
   // Generate credentials when switching to registration form
   useEffect(() => {
     if (!isLoginForm) {
@@ -128,7 +193,7 @@ const Login = ({ onLogin }: LoginProps) => {
       // Clear credentials when switching to login form
       setGeneratedUsername("");
       setGeneratedPassword("");
-      setLoginEmail("");
+      setLoginUsername("");
       setLoginPassword("");
       setShowPassword(false);
       setShowGeneratedPassword(false);
@@ -201,24 +266,24 @@ const Login = ({ onLogin }: LoginProps) => {
                 </p>
               </div>
 
-              {/* Email Input */}
+              {/* Username Input */}
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Anonymous E-mail
+                  Username
                 </label>
                 <input
-                  type="email"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
+                  type="text"
+                  value={loginUsername}
+                  onChange={(e) => setLoginUsername(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 border-0 focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                  placeholder="Enter your anonymous email"
+                  placeholder="Enter your username"
                 />
               </div>
 
               {/* Password Input */}
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Anonymous Password
+                  Password
                 </label>
                 <div className="relative">
                   <input
@@ -226,7 +291,7 @@ const Login = ({ onLogin }: LoginProps) => {
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     className="w-full px-4 py-3 pr-12 rounded-lg bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 border-0 focus:ring-2 focus:ring-purple-500 focus:outline-none"
-                    placeholder="Enter your anonymous password"
+                    placeholder="Enter your password"
                   />
                   <button
                     type="button"
@@ -274,7 +339,7 @@ const Login = ({ onLogin }: LoginProps) => {
 
               {/* Enter BlurText Button */}
               <button
-                onClick={onLogin}
+                onClick={handleLogin}
                 className="w-full bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 mb-4"
               >
                 Enter the BlurText
@@ -414,7 +479,7 @@ const Login = ({ onLogin }: LoginProps) => {
 
               {/* Create Account Button */}
               <button
-                onClick={onLogin}
+                onClick={handleRegister}
                 className="w-full bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 mb-4"
               >
                 Create Anonymous Account
