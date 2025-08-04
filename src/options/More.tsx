@@ -13,14 +13,10 @@ const More = () => {
   const languages: { value: Language; label: string }[] = [
     { value: "en", label: "English" },
     { value: "ru", label: "Русский" },
-    { value: "es", label: "Español" },
-    { value: "fr", label: "Français" },
-    { value: "de", label: "Deutsch" },
     { value: "it", label: "Italiano" },
-    { value: "pt", label: "Português" },
+    { value: "fr", label: "Français" },
+    { value: "si", label: "සිංහල" },
     { value: "ja", label: "日本語" },
-    { value: "ko", label: "한국어" },
-    { value: "zh", label: "中文" },
   ];
 
   const handleLanguageChange = (language: Language) => {
@@ -156,7 +152,7 @@ const More = () => {
                 </svg>
               </span>
               <span className="text-xs mt-1 text-gray-700 dark:text-gray-600">
-                ukihunter
+                <TranslatedText>ukihunter</TranslatedText>
               </span>
             </a>
             {/* Developer 2 */}
@@ -177,7 +173,7 @@ const More = () => {
                 </svg>
               </span>
               <span className="text-xs mt-1 text-gray-600 dark:text-gray-600">
-                AkashMLodiwiksz
+                <TranslatedText>AkashMLodiwiksz</TranslatedText>
               </span>
             </a>
             {/* Developer 3 */}
@@ -198,7 +194,7 @@ const More = () => {
                 </svg>
               </span>
               <span className="text-xs mt-1 text-gray-600 dark:text-gray-600">
-                ManushaBandara
+                <TranslatedText>ManushaBandara</TranslatedText>
               </span>
             </a>
           </div>

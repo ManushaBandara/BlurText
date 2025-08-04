@@ -3,6 +3,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { TranslatedText } from "@/hooks/useTranslation";
 
 interface LoginProps {
   onLogin: (userData?: { username: string; id: string }) => void;
@@ -218,17 +219,17 @@ const Login = ({ onLogin }: LoginProps) => {
         <div className="backdrop-blur-sm bg-white/10 dark:bg-black/10 rounded-2xl p-8 border border-white/20 dark:border-gray-700/30">
           {/* Welcome Text  and animation happend here*/}
           <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent animate-fade-in">
-            Welcome to BlurText
+            <TranslatedText>Welcome to BlurText</TranslatedText>
           </h1>
           <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed animate-fade-in-delay">
-            Your anonymous social platform where privacy meets connection. Share
-            thoughts freely without revealing your identity.
+            <TranslatedText>Your anonymous social platform where privacy meets connection. Share
+            thoughts freely without revealing your identity.</TranslatedText>
           </p>
           <div className="mt-6 flex items-center space-x-2 animate-fade-in-delay-2">
             {/* Animated ping dot */}
             <div className="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
             <span className="text-sm text-gray-600 dark:text-gray-400">
-              Secure & Anonymous
+              <TranslatedText>Secure & Anonymous</TranslatedText>
             </span>
           </div>
         </div>
@@ -255,21 +256,21 @@ const Login = ({ onLogin }: LoginProps) => {
                   />
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Anonymous Social Platform
+                  <TranslatedText>Anonymous Social Platform</TranslatedText>
                 </p>
               </div>
 
               {/* Credentials Section */}
               <div className="mb-6">
                 <p className="text-center text-green-600 dark:text-green-400 font-medium">
-                  Enter Your Credentials To Login
+                  <TranslatedText>Enter Your Credentials To Login</TranslatedText>
                 </p>
               </div>
 
               {/* Username Input */}
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Username
+                  <TranslatedText>Username</TranslatedText>
                 </label>
                 <input
                   type="text"
@@ -283,7 +284,7 @@ const Login = ({ onLogin }: LoginProps) => {
               {/* Password Input */}
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Password
+                  <TranslatedText>Password</TranslatedText>
                 </label>
                 <div className="relative">
                   <input
@@ -342,7 +343,7 @@ const Login = ({ onLogin }: LoginProps) => {
                 onClick={handleLogin}
                 className="w-full bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 mb-4"
               >
-                Enter the BlurText
+                <TranslatedText>Enter the BlurText</TranslatedText>
               </button>
 
               {/* Create Account Link */}
@@ -350,7 +351,7 @@ const Login = ({ onLogin }: LoginProps) => {
                 onClick={switchToRegister}
                 className="text-center text-gray-600 dark:text-gray-400 hover:text-purple-500 dark:hover:text-purple-400 cursor-pointer transition-colors duration-300"
               >
-                Not a Member, Create New Account
+                <TranslatedText>Not a Member, Create New Account</TranslatedText>
               </p>
             </>
           ) : (
@@ -372,21 +373,21 @@ const Login = ({ onLogin }: LoginProps) => {
                   />
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Anonymous Social Platform
+                  <TranslatedText>Anonymous Social Platform</TranslatedText>
                 </p>
               </div>
 
               {/* Registration Section */}
               <div className="mb-6">
                 <p className="text-center text-green-600 dark:text-green-400 font-medium">
-                  Create Your Anonymous Account
+                  <TranslatedText>Create Your Anonymous Account</TranslatedText>
                 </p>
               </div>
 
               {/* Generate Anonymous Email */}
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Anonymous Username
+                  <TranslatedText>Anonymous Username</TranslatedText>
                 </label>
                 <input
                   type="text"
@@ -400,7 +401,7 @@ const Login = ({ onLogin }: LoginProps) => {
               {/* Generate Anonymous Password */}
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Anonymous Password
+                  <TranslatedText>Anonymous Password</TranslatedText>
                 </label>
                 <div className="relative">
                   <input
@@ -474,7 +475,7 @@ const Login = ({ onLogin }: LoginProps) => {
                     d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
-                Download Credentials
+                <TranslatedText>Download Credentials</TranslatedText>
               </button>
 
               {/* Create Account Button */}
@@ -482,7 +483,7 @@ const Login = ({ onLogin }: LoginProps) => {
                 onClick={handleRegister}
                 className="w-full bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 mb-4"
               >
-                Create Anonymous Account
+                <TranslatedText>Create Anonymous Account</TranslatedText>
               </button>
 
               {/* Back to Login Link */}
@@ -490,7 +491,7 @@ const Login = ({ onLogin }: LoginProps) => {
                 onClick={switchToLogin}
                 className="text-center text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 cursor-pointer transition-colors duration-300"
               >
-                Already have an account? Login here
+                <TranslatedText>Already have an account? Login here</TranslatedText>
               </p>
             </>
           )}
