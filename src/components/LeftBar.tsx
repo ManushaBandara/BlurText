@@ -6,42 +6,68 @@ import More from "@/options/More";
 import Icon from "./Icon";
 import { useTheme } from "@/contexts/ThemeContext";
 import { TranslatedText } from "@/hooks/useTranslation";
+import Home from "@/content/Home";
+import Messages from "@/content/Messages";
 
 const menulist = [
   {
     id: 1,
     name: "Home",
-    content: <div><TranslatedText>Home Content</TranslatedText></div>,
+    content: (
+      <div>
+        <Home />
+      </div>
+    ),
     icon: "home.svg",
   },
   {
     id: 2,
     name: "Explore",
-    content: <div><TranslatedText>Explore Content</TranslatedText></div>,
+    content: (
+      <div>
+        <TranslatedText>Explore Content</TranslatedText>
+      </div>
+    ),
     icon: "explore.svg",
   },
   {
     id: 3,
     name: "Notification",
-    content: <div><TranslatedText>Notification Content</TranslatedText></div>,
+    content: (
+      <div>
+        <TranslatedText>Notification Content</TranslatedText>
+      </div>
+    ),
     icon: "notification.svg",
   },
   {
     id: 4,
     name: "Messages",
-    content: <div><TranslatedText>Messages Content</TranslatedText></div>,
+    content: (
+      <div>
+        <Messages />
+      </div>
+    ),
     icon: "message.svg",
   },
   {
     id: 5,
     name: "Bookmarks",
-    content: <div><TranslatedText>Bookmarks Content</TranslatedText></div>,
+    content: (
+      <div>
+        <TranslatedText>Bookmarks Content</TranslatedText>
+      </div>
+    ),
     icon: "bookmark.svg",
   },
   {
     id: 9,
     name: "Profile",
-    content: <div><TranslatedText>Profile Content</TranslatedText></div>,
+    content: (
+      <div>
+        <TranslatedText>Profile Content</TranslatedText>
+      </div>
+    ),
     icon: "profile.svg",
   },
   {

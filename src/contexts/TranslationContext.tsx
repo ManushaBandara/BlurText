@@ -13,7 +13,9 @@ interface TranslationContextType {
   isTranslating: boolean;
 }
 
-const TranslationContext = createContext<TranslationContextType | undefined>(undefined);
+const TranslationContext = createContext<TranslationContextType | undefined>(
+  undefined
+);
 
 // Cache for translations to avoid repeated API calls
 const translationCache: { [key: string]: string } = {};
@@ -22,7 +24,9 @@ export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>("en");
-  const [translations, setTranslations] = useState<{ [key: string]: string }>({});
+  const [translations, setTranslations] = useState<{ [key: string]: string }>(
+    {}
+  );
   const [isTranslating, setIsTranslating] = useState(false);
 
   useEffect(() => {
@@ -38,9 +42,9 @@ export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("selectedLanguage", language);
     // Clear translations cache when language changes
     setTranslations({});
-    
+
     // Reload the page while staying on the same page/URL
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Force reload without changing the current URL
       window.location.href = window.location.href;
     }
@@ -65,12 +69,12 @@ export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({
 
     try {
       setIsTranslating(true);
-      
+
       // Call our translation API with better error handling
-      const response = await fetch('/api/translate', {
-        method: 'POST',
+      const response = await fetch("/api/translate", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           text,
@@ -79,36 +83,38 @@ export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({
       });
 
       if (!response.ok) {
-        console.warn(`Translation API returned ${response.status}: ${response.statusText}`);
+        console.warn(
+          `Translation API returned ${response.status}: ${response.statusText}`
+        );
         throw new Error(`Translation API error: ${response.status}`);
       }
 
       const result = await response.json();
       const translatedText = result.translatedText || text;
-      
+
       // Cache the translation
       translationCache[cacheKey] = translatedText;
-      setTranslations(prev => ({
+      setTranslations((prev) => ({
         ...prev,
         [cacheKey]: translatedText,
       }));
-      
+
       return translatedText;
     } catch (error) {
-      console.warn('Translation API failed, using fallback:', error);
-      
+      console.warn("Translation API failed, using fallback:", error);
+
       // Try fallback translation first
       const fallbackText = getFallbackTranslation(text, currentLanguage);
       if (fallbackText !== text) {
         // Cache the fallback translation
         translationCache[cacheKey] = fallbackText;
-        setTranslations(prev => ({
+        setTranslations((prev) => ({
           ...prev,
           [cacheKey]: fallbackText,
         }));
         return fallbackText;
       }
-      
+
       // Return original text if no fallback available
       return text;
     } finally {
@@ -117,13 +123,15 @@ export const TranslationProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <TranslationContext.Provider value={{
-      currentLanguage,
-      setLanguage,
-      translate,
-      translations,
-      isTranslating,
-    }}>
+    <TranslationContext.Provider
+      value={{
+        currentLanguage,
+        setLanguage,
+        translate,
+        translations,
+        isTranslating,
+      }}
+    >
       {children}
     </TranslationContext.Provider>
   );
