@@ -39,7 +39,7 @@ const Messages = () => {
       timestamp: "2m",
       avatar: "https://avatar.iran.liara.run/public/1",
       unread: true,
-      isOnline: true,
+      isOnline: false,
     },
     {
       id: 2,
@@ -324,7 +324,6 @@ const Messages = () => {
         </div>
       </div>
 
-      {/* Recent Messages List - Flex-1 to take remaining space */}
       <div className="flex-1 overflow-y-auto bg-white dark:bg-[#262335]">
         {recentMessages.map((message) => (
           <div
@@ -370,7 +369,6 @@ const Messages = () => {
         ))}
       </div>
 
-      {/* New Chat Modal */}
       {showNewChatModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white dark:bg-[#262335] rounded-lg w-96 max-h-96 overflow-hidden">
